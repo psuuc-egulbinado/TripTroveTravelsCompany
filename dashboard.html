@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <title>Dashboard</title>
+
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+body {
+	font-family: 'Poppins', sans-serif;
+	font-size: 13px;
+	font-weight: 300;
+    background: white;
+}
+
+a, button { transition: all 0.3s ease; }
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+p:last-child { margin-bottom: 0; }
+
+.tm-page-wrap { 
+    max-width: 1400px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    background: white;
+}
+
+.tm-container-outer {
+    max-width: 1400px;
+    margin: 0 auto;  
+    background-color: #e95d00;  
+}
+
+.tm-content-box { box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); }
+.tm-text-gray { color: #787676; }
+
+.tm-text-highlight {
+    color: #c66995;
+    font-weight: 600;
+}
+
+.tm-bg-primary { background: #69c6ba; }
+.tm-bg-highlight { background: #c66995; }
+
+.btn-primary {
+    color: white;
+    text-decoration: none;
+    background: #e95d00;
+    border: 1px solid #e95d00;
+    border-radius: 10px;
+    outline: none;
+}
+
+.btn-primary:hover {
+    background-color: rgb(240, 240, 240);
+    color: black;
+    border: solid 1px black; 
+    }
+.tm-top-bar .navbar-expand-lg .navbar-nav .nav-link {
+     padding: 50px 35px; 
+    }
+
+.tm-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10000;
+    transition: all 0.2s ease-in-out;
+    height: 119px;
+    background: white;
+}
+
+.tm-top-bar.active {
+    height: 60px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.tm-top-bar.active .navbar-expand-lg .navbar-nav .nav-link { padding: 20px 35px; }
+.tm-top-bar.active .navbar-brand { font-size: 1.4rem; }
+
+.tm-top-bar .navbar-brand img {
+    width: 60px;
+    height: auto;
+}
+
+.tm-top-bar.active .navbar-brand img { width: 40px; }
+.tm-top-bar-bg { height: 119px; }
+.tm-top-bar a { color: black; }
+
+.navbar-brand {
+	font-size: 2.2rem;    
+    text-transform: uppercase;    
+}
+
+.navbar {
+    font-weight: 700;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-link.active, .nav-link:hover {	color: #69c6ba;	}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(104, 199, 187)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler { 
+    border-color: rgb(104, 199, 187);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.tm-banner-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.tm-banner-subtitle {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.tm-banner-header { color: white; }
+.tm-banner-overlay {
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: auto;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.7);
+}
+.tm-banner-bg {
+    background: url(img/banner.jpg) center top no-repeat;    
+    min-height: 720px;
+    position: relative;
+}
+.tm-banner-row { 
+    position: relative;
+    z-index: 100;   
+    justify-content: center;
+    padding-top: 100px;
+}
+.tm-banner-row-header { text-align: center; }
+.tm-down-arrow-link { 
+    color: white;
+    background-color: #69c6ba;
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin-top: 0px;
+    display: inline-block;
+}
+
+.tm-down-arrow-link:hover,
+.tm-down-arrow-link:focus {
+    color: white;
+    background-color: #c66995;
+}
+
+/* Search form */
+select.tm-select.form-control:not([size]):not([multiple]) { height: 45px; }
+.form-control {
+    font-size: 0.8rem;
+    padding: .75rem;
+}
+label { font-weight: 700; }
+.tm-search-form {
+    background-color: #f5f6f6;
+    padding: 25px 25px 15px;
+    width: 100%;
+    max-width: 830px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.tm-form-group { float: left; }
+.tm-form-group-pad { padding: 0 8px; }
+.tm-form-group-1 { width: 50%; }
+.tm-form-group-2 { width: 50%; }
+.tm-form-group-3 { width: 25%; }
+.form-control { border-radius: 0; }
+
+.tm-btn {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 400;  
+    padding: 12px 20px;
+}
+
+.tm-btn-white { background: white; }
+.tm-btn-white-primary { color: #69c6ba; }
+.tm-btn-white-highlight { color: #c66995; }
+
+.tm-btn-white-primary:hover,
+.tm-btn-white-primary:focus,
+.tm-btn-white-primary:active {
+    background: #c66995;
+    color: white;
+}
+
+.tm-btn-white-highlight:hover,
+.tm-btn-white-highlight:focus,
+.tm-btn-white-highlight:active {
+    background: #69c6ba;
+    color: white;
+}
+
+.tm-btn-search { width: 100%; }
+
+.tm-btn-search:hover,
+.tm-btn-search:active,
+.tm-btn-search:focus {
+    background: #c66995;
+}
+
+.tm-bg-gray { background-color: #efefef; }
+.tm-about-text-wrap { max-width: 830px; }
+
+.tm-right {
+    display: inline-block;
+}
+
+.tab-pane {
+    max-width: 970px;
+    margin: 60px auto;
+}
+
+.tm-recommended-place {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.tm-recommended-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;    
+}
+
+.tm-recommended-img { width: 270px; }
+
+.tm-recommended-description-box {
+    padding: 30px;
+    width: 500px;
+}
+
+.tm-recommended-price-box {    
+    background-color: #e95d00;
+    background-image: url(img/button-curve.png);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    font-weight: 400;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 20px;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.tm-recommended-price-box:hover { background-color: #fa8333; }
+
+.tm-recommended-price {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.tm-recommended-price-link {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tm-d-table { display: table; }
+
+footer {
+    background: #69c6ba;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;    
+    font-size: 0.8rem;
+}
+
+.form-control {
+    background-color: #f5f5f5;
+    border: none;
+}
+
+.form-control:focus {
+    border-color: #69c6ba;
+    box-shadow: 0 0 0 0.1rem #69c6babf;
+}
+
+.tm-name-container,
+.tm-email-container {
+    width: 210px;
+    float: left;    
+}
+
+.tm-email-container { margin-left: 10px; }
+
+.tm-btn-send {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+#google-map { height: 600px; }
+
+@media screen and (max-width: 1080px) {
+    .tm-tab-link-li { width: 25%; }
+}
+
+@media screen and (max-width: 1033px) {
+    .tm-slideshow-description { width: 55%; }
+}
+
+@media screen and (max-width: 991px) {
+    .tm-top-bar .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 15px 20px;
+        background: white;
+    }
+
+    .tm-top-bar, .tm-top-bar-bg { height: auto; }
+
+    #mainNav {
+        width: 200px;
+        position: absolute;
+        top: 53px;
+        right: 15px;
+        -webkit-box-shadow: 0px 0px 7px 0px rgba(214,214,214,1);
+        -moz-box-shadow: 0px 0px 7px 0px rgba(214,214,214,1);
+        box-shadow: 0px 0px 7px 0px rgba(214,214,214,1);
+    }
+
+    .tm-top-bar {
+        height: 60px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+    }
+
+    .tm-top-bar.active .navbar-expand-lg .navbar-nav .nav-link,
+    .tm-top-bar .navbar-expand-lg .navbar-nav .nav-link { padding: 15px; }
+
+    .tm-top-bar .navbar-brand { font-size: 1.4rem; }
+
+    .tm-top-bar .navbar-brand img {
+        width: 60px;
+        height: auto;
+    }
+
+    .tm-top-bar .navbar-brand img { width: 40px; }
+
+    .tab-pane {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .tm-recommended-description-box { width: 450px; }
+}
+
+@media screen and (max-width: 986px) {
+
+    .tm-contact-form {
+        position: static;
+        width: 100%;
+    }
+
+    .tm-name-container,
+    .tm-email-container {
+        width: 49%;
+    }
+
+    .tm-email-container {
+        margin-left: 0;
+        float: right;
+    }
+
+}
+
+@media screen and (max-width: 860px) {
+    .tm-recommended-description-box { width: 350px; }
+}
+
+@media screen and (max-width: 826px) {
+
+    .tm-banner-row-header { padding-top: 120px; }
+
+    .tm-recommended-place-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: 0 auto 15px;
+    }
+
+    .tm-recommended-place {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 270px;
+    }
+
+    .tm-recommended-price,
+    .tm-recommended-price-link {
+        position: relative;
+        z-index: 1000;
+    }
+
+    .tm-recommended-price { padding-top: 50px; }
+
+    .tm-recommended-price-box {
+        width: 270px;
+        height: 180px;        
+        position: relative;
+        overflow: hidden;
+        padding-left: 0;
+        background-image: none;
+    }
+
+    .tm-recommended-price-box,
+    .tm-recommended-price-box:hover {
+        background-size: cover;
+    }
+
+    .tm-recommended-description-box { width: 270px; }
+}
+
+@media screen and (max-width: 767px) {
+    .tm-banner-row {
+        padding-top: 80px;
+        padding-bottom: 50px;
+    }
+
+    .tm-banner-header { margin-top: 100px; }
+
+    .tm-form-group-1,
+    .tm-form-group-2,
+    .tm-form-group-3 {
+        width: 100%;
+    }    
+}
+
+.hm{
+    color: white;
+    background-color: #e95d00;
+    border: 1px solid #e95d00;
+}
+
+.hm:hover{
+    color: #e95d00;
+    background-color: white;
+    border: 1px solid #e95d00;
+}
+
+.nav-item{
+font-size: 15px;
+} 
+
+.ca{
+    color: white;
+    background-color: #e95d00;
+    border: 1px #e95d00 solid;
+}
+
+.ca:hover{
+    background-color: rgb(240, 240, 240);
+    color: black;
+    border: solid 1px black;
+}
+
+.popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 9999;
+      width: 400px;
+      height: 250px;
+      display: none;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+      display: none;
+    }
+
+    .popup2 {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffff;
+      border: 1px solid #ccc;
+      padding: 25px;
+      z-index: 9999;
+      width: 400px;
+      height: 500px;
+      display: none;
+    }
+    
+
+    #cancelBtn, #confirmBtn, #finishBtn{
+        margin-top: 15px;
+        padding: 5px 35px;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    #cancelBtn{
+        margin-right: 3px;
+        color: #e95d00;
+        border: solid #e95d00 1px;
+        background-color: #ffff;
+    }
+
+    #confirmBtn{
+        margin-left: 3px;
+        color: white;
+        background-color: #e95d00;
+    }
+    
+    #finishBtn{
+        margin-left: 3px;
+        color: white;
+        background-color: #e95d00;
+        padding: 5px 50px;
+    }
+ </style>
+</head>
+<body>
+    <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3">
+
+        <div id="modalOverlay" class="modal-overlay"></div>
+
+        <!-- The floating pop-up div -->
+        <div id="popupDiv" class="popup">
+            <center>
+            <img src="https://empirelocal.co.uk/wp-content/uploads/2018/11/kisspng-computer-icons-hotel-symbol-check-mark-plus-5abccc853703d5.5962461715223225652254-e1551045790290.png" width="70px" height="70px" alt="">
+
+          <h2>Details Available</h2>
+          <p>Do you want to continue your booking?</p>
+       
+
+          <button id="cancelBtn">Cancel</button>
+          <button id="confirmBtn">Confirm</button>
+        </center>
+        </div>
+      
+        <div id="popupDiv2" class="popup2">
+            <center>
+            <img src="https://cdn150.picsart.com/upscale-275953209006211.png" width="70px" height="70px" alt="" style="margin-bottom: 10px; margin-top: 10px;">
+        </center>
+
+          <p style="font-size: 11px; "> To Jerome, <br> <br>
+
+            Congratulations! We are delighted to inform you that your reservation with our travel company has been successfully confirmed. Thank you for choosing us to assist you with your travel plans. <br> <br>
+        
+            Should you have any questions or require further assistance before your departure, please do not hesitate to reach out to our customer support team. We are here to provide you with any information or guidance you may need. <br> <br>
+            
+            Once again, we appreciate your trust in our services, and we look forward to providing you with an incredible travel experience. <br> <br>
+            
+            Best regards,
+            Trip Trove Company
+
+            
+            </p>
+            <center>        
+                <button style="margin-top: 30px;" id="finishBtn">Finish</button>
+            </center>
+            
+        </div>
+
+
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img src="img/logo.png" alt="" width="40px">
+        <span class="fs-4">Trip Trove</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link hm">Home</a></li>
+        <li class="nav-item"><a href="#tgc" class="nav-link text-dark">Top Destinations</a></li>
+        <li class="nav-item"><a href="#" class="nav-link text-dark">Recommended Places</a></li>
+        <li class="nav-item"><a href="#" class="nav-link text-dark">Contact Us</a></li>
+      </ul>
+    </header>
+  </div>
+  
+    <div class="tm-page-wrap mx-auto">
+        <section class="tm-banner">
+            <div class="tm-container-outer tm-banner-bg">
+                <div class="container">
+
+                    <div class="row tm-banner-row tm-banner-row-header">
+                        <div class="col-xs-12">
+                            <div class="tm-banner-header">
+                                <h1 class="text-uppercase tm-banner-title">Let's begin</h1>
+                                <img src="img/dots-3.png" alt="Dots">
+                                <p class="tm-banner-subtitle">We assist you to choose the best.</p>
+                    
+                            </div>    
+                        </div>  <!-- col-xs-12 -->                      
+                    </div> <!-- row -->
+                    <div class="row tm-banner-row" id="tm-section-search">
+
+                        <form action="" method="get" class="tm-search-form tm-section-pad-2">
+                            <div class="form-row tm-search-form-row">                                
+                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+                                    <label for="inputCity">Choose Your Destination</label>
+                                    <input name="destination" type="text" class="form-control" id="inputCity" placeholder="Type your destination...">
+                                </div>
+                                <div class="form-group tm-form-group tm-form-group-1">                                    
+                                    <div class="form-group tm-form-group tm-form-group-pad tm-form-group-2">
+                                        <label for="inputRoom">How many rooms?</label>
+                                        <select name="room" class="form-control tm-select" id="inputRoom">
+                                            <option value="1" selected>1 Room</option>
+                                            <option value="2">2 Rooms</option>
+                                            <option value="3">3 Rooms</option>
+                                            <option value="4">4 Rooms</option>
+                                            <option value="5">5 Rooms</option>
+                                            <option value="6">6 Rooms</option>
+                                            <option value="7">7 Rooms</option>
+                                            <option value="8">8 Rooms</option>
+                                            <option value="9">9 Rooms</option>
+                                            <option value="10">10 Rooms</option>
+                                        </select>                                        
+                                    </div>
+                                    <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">                                       
+                                        <label for="inputAdult">Adult</label>     
+                                        <select name="adult" class="form-control tm-select" id="inputAdult">
+                                            <option value="1" selected>1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>                                        
+                                    </div>
+                                    <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+
+                                        <label for="inputChildren">Children</label>                                            
+                                        <select name="children" class="form-control tm-select" id="inputChildren">
+                                            <option value="0" selected>0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
+                            </div> <!-- form-row -->
+                            <div class="form-row tm-search-form-row">
+
+                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+                                    <label for="inputCheckIn">Check In Date</label>
+                                    <input name="check-in" type="date" class="form-control" id="inputCheckIn" placeholder="Check In">
+                                </div>
+                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-3">
+                                    <label for="inputCheckOut">Check Out Date</label>
+                                    <input name="check-out" type="date" class="form-control" id="inputCheckOut" placeholder="Check Out">
+                                </div>
+                                <div class="form-group tm-form-group tm-form-group-pad tm-form-group-1">
+                                    <label for="btnSubmit">&nbsp;</label>
+                                    <button type="button"  class="btn tm-btn tm-btn-search text-uppercase ca" id="btnSubmit">Check Availability</button>
+                                </div>
+                            </div>                              
+                        </form>                             
+
+                    </div> <!-- row -->
+                    <div class="tm-banner-overlay"></div>
+                </div>  <!-- .container -->                   
+            </div>     <!-- .tm-container-outer -->                 
+        </section>
+
+        <section class="p-5 tm-container-outer tm-bg-gray">            
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 mx-auto tm-about-text-wrap text-center">                        
+                        <h2 class="text-uppercase mb-4">Your <strong>Journey</strong> is our priority</h2>
+                        <p class="mb-4">
+                            Our travel website, Wanderlust Journeys, is designed with a primary focus on providing an exceptional experience for our users. We understand that planning a trip can be both exciting and overwhelming, so we strive to make the entire process seamless, enjoyable, and tailored to individual preferences.</p>
+                        <a href="#" class="text-uppercase btn-primary tm-btn">Continue explore</a>                              
+                    </div>
+                </div>
+            </div>            
+        </section>
+        
+            <div class="tab-content clearfix">
+                  
+                <!-- Tab 4 -->
+                <div class="tab-pane fade show active" id="4a">
+                <!-- Current Active Tab WITH "show active" classes in DIV tag -->
+                    <div class="tm-recommended-place-wrap">
+                        <div class="tm-recommended-place">
+                            <img src="https://www.greatrail.com/media/31764097/the-grand-canyon-usa-123rf-53542724-rf_tablet.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title" id="tgc">The Grand Canyon</h3>
+                                <p class="tm-text-highlight">USA</p>
+                                <p class="tm-text-gray">Carved by the Colorado River over millions of years, the Grand Canyon in Arizona is a magnificent natural...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$440</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>                        
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="https://cdn.tourradar.com/s3/serp/original/211393_CSTFvR9d.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">The Great Barrier Reef</h3>
+                                <p class="tm-text-highlight">Australia</p>
+                                <p class="tm-text-gray">Stretching over 2,300 kilometers along the Queensland coast, the Great Barrier Reef is the world's largest coral reef...</p>   
+                            </div>
+                            <div id="preload-hover-img"></div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$490</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="https://wallpapertag.com/wallpaper/full/f/c/7/464416-large-amazon-rainforest-wallpaper-2560x1600-for-android-50.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">The Amazon Rainforest</h3>
+                                <p class="tm-text-highlight">South America</p>
+                                <p class="tm-text-gray">The Amazon Rainforest is the world's largest tropical rainforest, home to an incredible array of plant and...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$360</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="https://www.hdwallpaper.nu/wp-content/uploads/2017/03/santorini-24.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Santorini</h3>
+                                <p class="tm-text-highlight">Greece</p>
+                                <p class="tm-text-gray">Santorini is a Greek island renowned for its iconic white-washed buildings, blue-domed churches, and breathtaking caldera views. The contrasting...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$870</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>    
+                    </div>                        
+
+                    <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table">Show More Places</a>
+                </div> <!-- tab-pane -->
+                
+                <!-- Tab 5 -->
+                <div class="tab-pane fade" id="5a">
+
+                    <div class="tm-recommended-place-wrap">
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-05.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Africa Resort Hotel</h3>
+                                <p class="tm-text-highlight">First City</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$550</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>                        
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-04.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Aenean ac magna diam</h3>
+                                <p class="tm-text-highlight">Second City</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$560</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-07.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Beach Barbecue Sunset</h3>
+                                <p class="tm-text-highlight">Third City</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$570</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-06.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Grand Resort Pasha</h3>
+                                <p class="tm-text-highlight">Fourth City</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$580</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>    
+                    </div>                        
+
+                    <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table">Show More Places</a>
+                </div> <!-- tab-pane -->   
+                
+                <!-- Tab 6 -->            
+                <div class="tab-pane fade" id="6a">
+
+                    <div class="tm-recommended-place-wrap">
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-04.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Hotel Australia</h3>
+                                <p class="tm-text-highlight">City One</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$660</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>                        
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-05.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Proin interdum ullamcorper</h3>
+                                <p class="tm-text-highlight">City Two</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$650</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-06.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Beach Barbecue Sunset</h3>
+                                <p class="tm-text-highlight">City Three</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$640</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-07.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Grand Resort Pasha</h3>
+                                <p class="tm-text-highlight">City Four</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$630</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>    
+                    </div>                        
+
+                    <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table">Show More Places</a>
+                </div> <!-- tab-pane -->
+                
+                <!-- Tab 7 -->
+                <div class="tab-pane fade" id="7a">
+
+                    <div class="tm-recommended-place-wrap">
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-04.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Antartica Resort</h3>
+                                <p class="tm-text-highlight">Ant City One</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$770</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>                        
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-05.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Pulvinar Semper</h3>
+                                <p class="tm-text-highlight">Ant City Two</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$230</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-06.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Cras vel sapien</h3>
+                                <p class="tm-text-highlight">Ant City Three</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$140</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>
+
+                        <div class="tm-recommended-place">
+                            <img src="img/tm-img-07.jpg" alt="Image" class="img-fluid tm-recommended-img">
+                            <div class="tm-recommended-description-box">
+                                <h3 class="tm-recommended-title">Nullam eget est</h3>
+                                <p class="tm-text-highlight">Ant City Four</p>
+                                <p class="tm-text-gray">Sed egestas, odio nec bibendum mattis, quam odio hendrerit risus, eu varius eros lacus sit amet lectus. Donec blandit luctus dictum...</p>   
+                            </div>
+                            <a href="#" class="tm-recommended-price-box">
+                                <p class="tm-recommended-price">$190</p>
+                                <p class="tm-recommended-price-link">Continue Reading</p>
+                            </a>
+                        </div>    
+                    </div>                        
+
+                    <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table">Show More Places</a>
+                </div> <!-- tab-pane -->
+            </div>
+        </div>
+
+        <footer class="tm-container-outer">
+            <p class="text-light">Copyright © <span class="tm-current-year">2023</span> Trip Trove Company     
+            . Designed by Edgardo G. Ulbinado Jr.</p>
+        </footer>
+    </div>
+</div> <!-- .main-content -->
+           
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+
+    
+    
+    </script>
+
+<script>
+    var openBtn = document.getElementById('btnSubmit');
+    var popupDiv = document.getElementById('popupDiv');
+    var popupDiv2 = document.getElementById('popupDiv2');
+    var closeBtn = document.getElementById('cancelBtn');
+    var confirmBtn = document.getElementById('confirmBtn');
+    var finishBtn = document.getElementById('finishBtn');
+
+    openBtn.addEventListener('click', function() {
+    modalOverlay.style.display = 'block';
+      popupDiv.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', function() {
+        modalOverlay.style.display = 'none';
+      popupDiv.style.display = 'none';
+    });
+
+    confirmBtn.addEventListener('click', function() {
+        popupDiv.style.display = 'none';
+      popupDiv2.style.display = 'block';
+    });
+
+    finishBtn.addEventListener('click', function() {
+        modalOverlay.style.display = 'none';
+      popupDiv2.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
